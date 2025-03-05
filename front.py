@@ -7,12 +7,13 @@ win.geometry('450x600+250+50')
 win.title('hoom')
 win.config(bg='indigo')
 
+db=database.def_('data.db')
 ################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 def insert(): 
     fname=ent_fname.get()
     lname=ent_lname.get()
     score=ent_score.get()
-    database.def_.insert_(fname,lname,score)
+    db.insert_(fname,lname,score)
     show__()
     clear_()
 
@@ -27,19 +28,22 @@ def exit_():
         win.destroy()
 
 def show__():
-    database.def_.show_()
+    lst_.delete(0,END)
+    y=db.show_()
+    lst_.insert(END,y)
 
-def get():
+def get(event):
     global x
-    ent_fname.insert(0,x[1])
-    ent_lname.insert(0,x[2])
-    ent_score.insert(0,x[3])
 
     index=lst_.curselection()
+    if index:
+        record=lst_.get(index)
+        x=(str(record).split(" "))
+        clear_()
+        ent_fname.insert(0,x[1])
+        ent_lname.insert(0,x[2])
+        ent_score.insert(0,x[3])
 
-    record=lst_.get(index)
-
-    x=(str(record).split(" "))    
 
 def update__():
 
@@ -51,10 +55,8 @@ def update__():
     id=x[0]
 
 
-    database.def_.update_(id,fname,lname,score)
+    db.update_(id,fname,lname,score)
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-win.bind('<w>',get(Event))
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lbl_fname=Label(win,text='fname =',font='raleway 18')
 lbl_fname.place(x='20',y='30')
@@ -119,7 +121,7 @@ btn_exit.place(x='20',y='530',width='95',height='50')
 
 
 
-
+lst_.bind('<Enter>',get)
 
 
 win.mainloop()
