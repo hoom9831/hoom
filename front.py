@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import messagebox
-import sqlite3
 import database
 win=Tk()
 win.geometry('450x600+250+50')
@@ -12,15 +11,17 @@ db=database.def_('data.db')
 def insert(): 
     fname=ent_fname.get()
     lname=ent_lname.get()
-    score=ent_score.get()
-    db.insert_(fname,lname,score)
+    phone=ent_phone.get()
+    address=ent_address.get()
+    db.insert_(fname,lname,phone,address)
     show__()
     clear_()
 
 def clear_():
     ent_fname.delete(0,END)
     ent_lname.delete(0,END)
-    ent_score.delete(0,END)
+    ent_phone.delete(0,END)
+    ent_address.delete(0,END)
 
 def exit_():
     ask=messagebox.askquestion("exit",'do you want to go?')
@@ -42,7 +43,8 @@ def get(event):
         clear_()
         ent_fname.insert(0,x[1])
         ent_lname.insert(0,x[2])
-        ent_score.insert(0,x[3])
+        ent_phone.insert(0,x[3])
+        ent_address.insert(0,x[4])
 
 
 def update__():
@@ -50,34 +52,48 @@ def update__():
 
     fname=ent_fname.get()
     lname=ent_lname.get()
-    score=ent_score.get()
+    phone=ent_phone.get()
+    address=ent_address.get()
 
     id=x[0]
 
 
-    db.update_(id,fname,lname,score)
+    db.update_(id,fname,lname,phone,address)
+
+def delete__():
+    fname=ent_fname.get()
+    lname=ent_lname.get()
+    phone=ent_phone.get()
+    address=ent_address.get()
+    db.delet_(fname,lname,phone,address)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lbl_fname=Label(win,text='fname =',font='raleway 18')
-lbl_fname.place(x='20',y='30')
+lbl_fname.place(x='20',y='20')
 
 ent_fname=Entry(win,font='raleway 18')
-ent_fname.place(x='120',y='30')
+ent_fname.place(x='120',y='20')
 
 lbl_lname=Label(win,text='lname =',font='raleway 18')
-lbl_lname.place(x='20',y='130')
+lbl_lname.place(x='20',y='70')
 
 ent_lname=Entry(win,font='raleway 18')
-ent_lname.place(x='120',y='130')
+ent_lname.place(x='120',y='70')
 
-lbl_score=Label(win,text='score =',font='raleway 18')
-lbl_score.place(x='20',y='230')
+lbl_phone=Label(win,text='score =',font='raleway 18')
+lbl_phone.place(x='20',y='120')
 
-ent_score=Entry(win,font='raleway 18')
-ent_score.place(x='120',y='230')
+ent_phone=Entry(win,font='raleway 18')
+ent_phone.place(x='120',y='120')
+
+lbl_address=Label(win,text='adrees=',font='raleway 18')
+lbl_address.place(x='20',y='170')
+
+ent_address=Entry(win,font='raleway 18')
+ent_address.place(x='120',y='170')
 #################################################################
 lst_=Listbox(win,font='raleway 18')
-lst_.place(x='120',y='280')
+lst_.place(x='120',y='300')
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4
 btn_insert=Button(win,text='insert',font='raleway 18',bg='#0000ff',command=insert)
 btn_insert.place(x='20',y='280',width='95',height='50')

@@ -5,24 +5,24 @@ class def_:
         self.cur=self.con.cursor()
         self.cur.execute('''
                         CREATE TABLE IF NOT EXISTS  home 
-                        (id INTEGER primary key,fname text, lname text,score text)
+                        (id INTEGER primary key,fname text, lname text,phone text,address text)
                         ''')
         self.con.commit()
 
-    def insert_(self,fname,lname,score):
-        self.cur.execute('INSERT INTO home (fname , lname , score) VALUES (?,?,?)',(fname,lname,score))
+    def insert_(self,fname,lname,phone,address):
+        self.cur.execute('INSERT INTO home (fname , lname , phone,address) VALUES (?,?,?,?)',(fname,lname,phone,address))
         self.con.commit()
 
     def show_(self):
         self.cur.execute('SELECT * FROM home ')
         return self.cur.fetchall()
 
-    def delet_(self,id,fname,lname,score):
-        self.cur.execute('DELETE * FROM home WHERE id=? or fname=? or lname=? or score=?',(id,fname,lname,score))
+    def delet_(self,id,fname,lname,phone,address):
+        self.cur.execute('DELETE  FROM home WHERE fname=? or lname=? or phone=? or address=?'(fname,lname,phone,address))
         self.con.commit()
-
-    def update_(self,id,fname,lname,score):
-        self.cur.execute('UPDATE home SET fname=? , lname=? , score=? WHERE id=?',(fname,lname,score,id))
+#id=? or id
+    def update_(self,id,fname,lname,phone,address):
+        self.cur.execute('UPDATE home SET fname=? , lname=? , phone=? , address=? WHERE id=?',(fname,lname,phone,address,id))
         self.con.commit()
     
     
