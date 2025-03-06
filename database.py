@@ -17,10 +17,10 @@ class def_:
         self.cur.execute('SELECT * FROM home ')
         return self.cur.fetchall()
 
-    def delet_(self,fname,lname,phone,address):
-        self.cur.execute('DELETE FROM home WHERE fname=? or lname=? or phone=? or address=?',(fname,lname,phone,address))
+    def delet_(self,id,fname,lname,phone,address):
+        self.cur.execute('DELETE FROM home WHERE id=? or fname=? or lname=? or phone=? or address=?',(id,fname,lname,phone,address))
         self.con.commit()
-#id=? or id id,
+
     def update_(self,id,fname,lname,phone,address):
         self.cur.execute('UPDATE home SET fname=? , lname=? , phone=? , address=? WHERE id=?',(fname,lname,phone,address,id))
         self.con.commit()

@@ -33,7 +33,7 @@ def show__():
     y=db.show_()
     for i in y:
         z=list(i)
-        lst_.insert(END,f'{z[0]} {z[1]} {z[2]} {z[3]}')
+        lst_.insert(END,f'{z[0]} {z[1]} {z[2]} {z[3]} {z[4]}')
 
 def get(event):
     global x
@@ -70,7 +70,9 @@ def delete__():
     phone=ent_phone.get()
     address=ent_address.get()
     id=x[0]
-    db.delet_(fname,lname,phone,address)
+    db.delet_(id,fname,lname,phone,address)
+    show__()
+    clear_()
 #
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lbl_fname=Label(win,text='fname =',font='raleway 18')
