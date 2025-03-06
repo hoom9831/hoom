@@ -31,7 +31,9 @@ def exit_():
 def show__():
     lst_.delete(0,END)
     y=db.show_()
-    lst_.insert(END,y)
+    for i in y:
+        z=list(i)
+        lst_.insert(END,f'{z[0]} {z[1]} {z[2]} {z[3]}')
 
 def get(event):
     global x
@@ -48,7 +50,7 @@ def get(event):
 
 
 def update__():
-
+    global x
 
     fname=ent_fname.get()
     lname=ent_lname.get()
@@ -59,14 +61,17 @@ def update__():
 
 
     db.update_(id,fname,lname,phone,address)
+    show__()
 
 def delete__():
+    global x
     fname=ent_fname.get()
     lname=ent_lname.get()
     phone=ent_phone.get()
     address=ent_address.get()
+    id=x[0]
     db.delet_(fname,lname,phone,address)
-
+#
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lbl_fname=Label(win,text='fname =',font='raleway 18')
 lbl_fname.place(x='20',y='20')
@@ -80,7 +85,7 @@ lbl_lname.place(x='20',y='70')
 ent_lname=Entry(win,font='raleway 18')
 ent_lname.place(x='120',y='70')
 
-lbl_phone=Label(win,text='score =',font='raleway 18')
+lbl_phone=Label(win,text='phon =',font='raleway 18')
 lbl_phone.place(x='20',y='120')
 
 ent_phone=Entry(win,font='raleway 18')
@@ -103,10 +108,10 @@ btn_show=Button(win,text='show',font='raleway 18',bg='#ff0000',command=show__)
 btn_show.place(x='20',y='330',width='95',height='50')
 
 
-btn_delete=Button(win,text='delete',font='raleway 18',bg='orange')
+btn_delete=Button(win,text='delete',font='raleway 18',bg='orange',command=delete__)
 btn_delete.place(x='20',y='380',width='95',height='50')
 
-btn_update=Button(win,text='update',font='raleway 18',bg='#ffff00')
+btn_update=Button(win,text='update',font='raleway 18',bg='#ffff00',command=update__)
 btn_update.place(x='20',y='430',width='95',height='50')
 
 
@@ -137,7 +142,7 @@ btn_exit.place(x='20',y='530',width='95',height='50')
 
 
 
-lst_.bind('<Enter>',get)
+lst_.bind('<ButtonRelease-1>',get)
 
 
 win.mainloop()
